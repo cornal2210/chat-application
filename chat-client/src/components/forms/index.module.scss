@@ -15,11 +15,15 @@ form {
     align-items: center;
 }
 
+.loginFormPassword {
+  margin: 8px 0;
+}
+
 .footerText {
-    & :last-child {
-      text-decoration: underline;
-      color: rgb(184, 184, 184);
-    }
-    margin: 10px 0;
-    text-align: center;
+  & :last-child {
+    text-decoration: underline;
+    color: rgb(184, 184, 184);
   }
+  margin: 10px 0;
+  text-align: center;
+}

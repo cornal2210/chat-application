@@ -4,3 +4,8 @@ export type CreateUserParams = {
     lastName: string
     password: string
 }
+
+export type UserCredentialsParams = {
+    username: string
+    password: string
+}
