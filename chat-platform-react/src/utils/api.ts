@@ -29,6 +29,7 @@ import {
   UserCredentialsParams,
 } from './types';
 
+console.log(process.env);
 const API_URL = process.env.REACT_APP_API_URL;
 
 const axiosClient = axios.create({ baseURL: API_URL });
