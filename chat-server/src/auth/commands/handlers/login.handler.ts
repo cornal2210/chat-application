@@ -6,7 +6,5 @@ import { AuthService } from '../../auth.service';
 export class LoginHandler implements ICommandHandler<LoginCommand> {
   constructor(private readonly authService: AuthService) {}
 
-  async execute(payload: LoginCommand) {
-    return await this.authService.getAccessToken(payload.userId);
-  }
+  async execute(payload: LoginCommand) {}
 }

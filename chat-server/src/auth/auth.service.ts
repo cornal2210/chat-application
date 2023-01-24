@@ -4,13 +4,13 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from '../users/user.entity';
 import { TokenPayload } from 'src/utils/types';
-import { JwtService } from '@nestjs/jwt';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AuthService {
   constructor(
     @InjectRepository(User) private readonly userRepo: Repository<User>,
-    private readonly jwtService: JwtService,
+    private readonly configService: ConfigService,
   ) {}
 
   public async getAuthenticatedUser(
@@ -27,11 +27,5 @@ export class AuthService {
 
     const isValid = await compareHash(plainTextPassword, user.password);
     return isValid ? user : null;
-  }
-
-  public getAccessToken(userId: string): string {
-    const payload: TokenPayload = { userId };
-    const token = this.jwtService.sign(payload);
-    return token;
   }
 }

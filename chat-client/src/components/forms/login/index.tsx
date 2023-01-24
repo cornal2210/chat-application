@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form"
 import { Link, useNavigate } from "react-router-dom"
+import { login } from "../../../utils/api";
 import { Button, InputContainer, InputField, InputLabel } from "../../../utils/styles"
 import { UserCredentialsParams } from "../../../utils/types"
 import styles from '../index.module.scss';
@@ -10,14 +11,14 @@ export const LoginForm = () => {
 
     const onSubmit = async(data: UserCredentialsParams) => {
        try {
-        // loginUser
+        await login(data);
        } catch (error) {
         console.error(error);
        } 
     }
 
     return (
-        <form>
+        <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
             <InputContainer>
                 <InputLabel htmlFor="username">Username</InputLabel>
                 <InputField
