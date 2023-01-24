@@ -4,7 +4,7 @@ import { User } from '../../../users/user.entity';
 import { Repository } from 'typeorm';
 import { CheckUsernameQuery } from '../implementations/check-username.query';
 import { HttpException, HttpStatus } from '@nestjs/common';
-import { UserAlreadyExists } from 'src/users/exceptions/UserAlreadyExists';
+import { UserAlreadyExists } from '../../exceptions/user-already-exists';
 
 @QueryHandler(CheckUsernameQuery)
 export class CheckUsernameHandler implements IQueryHandler<CheckUsernameQuery> {

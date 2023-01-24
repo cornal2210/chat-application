@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { RegisterDTO } from '../../auth/dto/auth.dto';
 import { Repository } from 'typeorm';
 import { User } from '../user.entity';
-import { hashPassword } from 'src/utils/helpers';
+import { compareHash, hashPassword } from '../../utils/helpers';
 
 @Injectable()
 export class UserService {
@@ -27,5 +27,18 @@ export class UserService {
     await this.userRepo.save(user);
 
     return true;
+  }
+
+  async getAuthenticatedUser(username: string, password: string) {
+    const user = await this.userRepo.findOne({ where: { username } });
+    const isPasswordMatching = compareHash(password, user.password);
+
+    if (!isPasswordMatching) {
+      throw new HttpException(
+        'Wrong credentials provided',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+    return user;
   }
 }

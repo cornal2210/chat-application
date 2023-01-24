@@ -12,6 +12,7 @@ import { TransformInterCeptor } from '../interceptors/transform.interceptor';
 import { CheckUsernameDTO } from './dto/user.dto';
 import { CheckUsernameQuery } from './queries/implementations/check-username.query';
 import { GetProfileQuery } from './queries/implementations/get-profile.query';
+import JwtAuthGuard from '../auth/jwt-auth.guard';
 
 @Controller('users')
 @UseInterceptors(TransformInterCeptor)
@@ -23,6 +24,7 @@ export class UsersController {
     return this.queryBus.execute(new CheckUsernameQuery(query));
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get('profile')
   async profile(@Req() req: IRequest) {
     const { user } = req;
